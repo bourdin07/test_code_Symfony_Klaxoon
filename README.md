@@ -1,11 +1,12 @@
 ## Explications
 
 - Il y a un fichier de migration pour mettre a jour la base de données
+    - `./dc exec php bin/console doctrine:migrations:migrate -n` pour mettre à jour la base de données
 - J'ai utilisé Postman pour tester les API
 - la route `/link/all` pour lister tout les liens (method : GET)
 - la route `/link/create` pour créer un lien (method : POST)
-    - en passant dans le corps de la requete {"link" : "...le lien..."}
-- la route `/link/delete/{id}` pour supprimer un lien
+    - en passant dans le corps de la requete `{"link" : "...le lien..."}`
+- la route `/link/delete/{id}` pour supprimer un lien (method : DELETE)
 
 # Simple Symfony Docker starter
 
