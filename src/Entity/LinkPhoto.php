@@ -21,7 +21,9 @@ class LinkPhoto extends Link implements \JsonSerializable
         $res = [];
 
         foreach ($this as $key => $value) {
-            $res[$key] = $value;
+            if ($key !== "datePublish") {
+                $res[$key] = $value;
+            }
         }
 
         return $res;
