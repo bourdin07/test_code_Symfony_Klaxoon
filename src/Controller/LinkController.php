@@ -37,7 +37,7 @@ class LinkController extends AbstractController
 
     /**
      * Méthode pour récupérer tous les liens
-     * @param PostRepository $postRepository
+     * @param LinkService $linkService
      *
      * @return JsonResponse
      * @Route("/all", name="links_get", methods={"GET"})
