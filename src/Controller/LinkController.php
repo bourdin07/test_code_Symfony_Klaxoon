@@ -25,27 +25,30 @@ class LinkController extends AbstractController
     /** @var AppService $appService */
     private $appService;
 
+    /** @var LinkService $linkService */
+    private $linkService;
+
     /** @var Embed $embed */
     private $embed;
 
-    public function __construct(LoggerInterface $logger, AppService $appService)
+    public function __construct(LoggerInterface $logger, AppService $appService, LinkService $linkService)
     {
         $this->logger = $logger;
         $this->appService = $appService;
+        $this->linkService = $linkService;
         $this->embed = new Embed();
     }
 
     /**
      * Méthode pour récupérer tous les liens
-     * @param LinkService $linkService
      *
      * @return JsonResponse
      * @Route("/all", name="links_get", methods={"GET"})
      */
-    public function getLinks(LinkService $linkService)
+    public function getLinks()
     {
         try {
-            $data = $linkService->getAll();
+            $data = $this->linkService->getAll();
 
             return $this->json($data);
         } catch (\Throwable $e) {
@@ -59,13 +62,12 @@ class LinkController extends AbstractController
      * Méthode pour créer un lien
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Service\LinkService $linkService
      *
      * @Route("/create", name="link_post", methods={"POST"})
      *
      * @return JsonResponse
      */
-    public function postLink(Request $request, LinkService $linkService)
+    public function postLink(Request $request)
     {
         try {
             $res = [];
@@ -84,7 +86,7 @@ class LinkController extends AbstractController
             $height = $info->code->height;
 
             if ($allProp["type"] === "video") {
-                $res = $linkService->createLinkVideo(
+                $res = $this->linkService->createLinkVideo(
                     [
                         "providerName" => $providerName,
                         "title" => $title,
@@ -97,7 +99,7 @@ class LinkController extends AbstractController
                     ]
                 );
             } else if ($allProp["type"] === "photo") {
-                $res = $linkService->createLinkPhoto(
+                $res = $this->linkService->createLinkPhoto(
                     [
                         "providerName" => $providerName,
                         "title" => $title,
@@ -122,16 +124,15 @@ class LinkController extends AbstractController
      * Méthode pour supprimer un lien, grâce à son id
      *
      * @param string $id
-     * @param \App\Service\LinkService $linkService
      *
      * @Route("/delete/{id}", name="link_delete", methods={"DELETE"})
      *
      * @return JsonResponse
      */
-    public function deleteLink(string $id, LinkService $linkService)
+    public function deleteLink(string $id)
     {
         try {
-            $res = $linkService->deleteLink($id);
+            $res = $this->linkService->deleteLink($id);
 
             return $this->json(["id" => $res]);
         } catch (\Throwable $e) {
