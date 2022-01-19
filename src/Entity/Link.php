@@ -61,6 +61,11 @@ class Link
      */
     protected $datePublish;
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     /**
      * @param string|null $url
      *
