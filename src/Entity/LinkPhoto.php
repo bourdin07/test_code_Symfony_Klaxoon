@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\LinkVimeoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LinkPhotoRepository")
  */
-class LinkVimeo extends Link implements \JsonSerializable
+class LinkPhoto extends Link implements \JsonSerializable
 {
     /**
      * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -40,13 +40,6 @@ class LinkVimeo extends Link implements \JsonSerializable
      * @ORM\Column(type="integer", nullable=true)
      */
     private $height;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $length;
 
     /**
      * @param integer|null $w
@@ -86,25 +79,5 @@ class LinkVimeo extends Link implements \JsonSerializable
     public function getHeight(): ?int
     {
         return $this->height;
-    }
-
-    /**
-     * @param float|null $f
-     *
-     * @return self
-     */
-    public function setLength(?float $f): self
-    {
-        $this->length = $f;
-
-        return $this;
-    }
-
-    /**
-     * @return float|null
-     */
-    public function getLength(): ?float
-    {
-        return $this->length;
     }
 }

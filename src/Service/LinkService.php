@@ -3,8 +3,8 @@
 namespace App\Service;
 
 use App\Entity\Link;
-use App\Entity\LinkFlickr;
-use App\Entity\LinkVimeo;
+use App\Entity\LinkPhoto;
+use App\Entity\LinkVideo;
 use App\Repository\LinkRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,41 +31,41 @@ class LinkService
         return $this->linkRepository->findAll();
     }
 
-    public function createLinkVimeo(array $data)
+    public function createLinkVideo(array $data)
     {
-        $linkVimeo = new LinkVimeo();
-        $linkVimeo->setProviderName($data["providerName"]);
-        $linkVimeo->setTitle($data["title"]);
-        $linkVimeo->setAuthor($data["author"]);
-        $linkVimeo->setDateAdd(new \DateTime());
-        $linkVimeo->setDatePublish(new \DateTime($data["publishDate"]));
-        $linkVimeo->setWidth($data["width"]);
-        $linkVimeo->setHeight($data["height"]);
-        $linkVimeo->setLength($data["duration"]);
-        $linkVimeo->setURL($data["URL"]);
+        $linkVideo = new LinkVideo();
+        $linkVideo->setProviderName($data["providerName"]);
+        $linkVideo->setTitle($data["title"]);
+        $linkVideo->setAuthor($data["author"]);
+        $linkVideo->setDateAdd(new \DateTime());
+        $linkVideo->setDatePublish(new \DateTime($data["publishDate"]));
+        $linkVideo->setWidth($data["width"]);
+        $linkVideo->setHeight($data["height"]);
+        $linkVideo->setLength($data["duration"]);
+        $linkVideo->setURL($data["URL"]);
 
-        $this->manager->persist($linkVimeo);
+        $this->manager->persist($linkVideo);
         $this->manager->flush();
 
-        return $linkVimeo;
+        return $linkVideo;
     }
 
-    public function createLinkFlickr(array $data)
+    public function createLinkPhoto(array $data)
     {
-        $linkFlickr = new LinkFlickr();
-        $linkFlickr->setProviderName($data["providerName"]);
-        $linkFlickr->setTitle($data["title"]);
-        $linkFlickr->setAuthor($data["author"]);
-        $linkFlickr->setDateAdd(new \DateTime());
-        $linkFlickr->setDatePublish(new \DateTime($data["publishDate"]));
-        $linkFlickr->setWidth($data["width"]);
-        $linkFlickr->setHeight($data["height"]);
-        $linkFlickr->setURL($data["URL"]);
+        $linkPhoto = new LinkPhoto();
+        $linkPhoto->setProviderName($data["providerName"]);
+        $linkPhoto->setTitle($data["title"]);
+        $linkPhoto->setAuthor($data["author"]);
+        $linkPhoto->setDateAdd(new \DateTime());
+        $linkPhoto->setDatePublish(new \DateTime($data["publishDate"]));
+        $linkPhoto->setWidth($data["width"]);
+        $linkPhoto->setHeight($data["height"]);
+        $linkPhoto->setURL($data["URL"]);
 
-        $this->manager->persist($linkFlickr);
+        $this->manager->persist($linkPhoto);
         $this->manager->flush();
 
-        return $linkFlickr;
+        return $linkPhoto;
     }
 
     public function deleteLink($id)

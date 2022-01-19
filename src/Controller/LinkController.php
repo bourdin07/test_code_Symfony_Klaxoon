@@ -73,6 +73,7 @@ class LinkController extends AbstractController
             $url = $data->get("link");
             $info = $this->embed->get($url);
             $oembed = $info->getOEmbed();
+            $allProp = $oembed->all();
 
             $providerName = $info->providerName;
             $title = $info->title;
@@ -82,9 +83,8 @@ class LinkController extends AbstractController
             $width = $info->code->width;
             $height = $info->code->height;
 
-            if ($providerName === "Vimeo") {
-                $allProp = $oembed->all();
-                $res = $linkService->createLinkVimeo(
+            if ($allProp["type"] === "video") {
+                $res = $linkService->createLinkVideo(
                     [
                         "providerName" => $providerName,
                         "title" => $title,
@@ -96,8 +96,8 @@ class LinkController extends AbstractController
                         "URL" => $url,
                     ]
                 );
-            } else if ($providerName === "Flickr") {
-                $res = $linkService->createLinkFlickr(
+            } else if ($allProp["type"] === "photo") {
+                $res = $linkService->createLinkPhoto(
                     [
                         "providerName" => $providerName,
                         "title" => $title,

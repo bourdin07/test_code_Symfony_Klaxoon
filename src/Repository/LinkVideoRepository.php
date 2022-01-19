@@ -8,12 +8,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @method LinkVimeo|null find($id, $lockMode = null, $lockVersion = null)
- * @method LinkVimeo|null findOneBy(array $criteria, array $orderBy = null)
- * @method LinkVimeo[]    findAll()
- * @method LinkVimeo[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method LinkVideo|null find($id, $lockMode = null, $lockVersion = null)
+ * @method LinkVideo|null findOneBy(array $criteria, array $orderBy = null)
+ * @method LinkVideo[]    findAll()
+ * @method LinkVideo[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LinkVimeoRepository extends ServiceEntityRepository
+class LinkVideoRepository extends ServiceEntityRepository
 {
     /**
      * @param \Doctrine\Persistence\ManagerRegistry $registry
