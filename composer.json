@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/persistence": "^2.3",
         "embed/embed": "^4.4",
+        "jms/serializer-bundle": "^4.0",
         "sensio/framework-extra-bundle": "^6.2",
         "slim/psr7": "^1.5",
         "symfony/console": "5.3.*",

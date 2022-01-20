@@ -7,28 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LinkPhotoRepository")
  */
-class LinkPhoto extends Link implements \JsonSerializable
+class LinkPhoto extends Link
 {
-    /**
-     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
-     *
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     *
-     * @since 5.4.0
-     */
-    public function jsonSerialize()
-    {
-        $res = [];
-
-        foreach ($this as $key => $value) {
-            if ($key !== "datePublish") {
-                $res[$key] = $value;
-            }
-        }
-
-        return $res;
-    }
-
     /**
      * @ORM\Column(type="integer", nullable=true)
      *

@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Embed\Embed;
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerBuilder;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -19,6 +21,9 @@ use Psr\Log\LoggerInterface;
  */
 class LinkController extends AbstractController
 {
+    /** @var Serializer */
+    private $serializer;
+
     /** @var LoggerInterface */
     private $logger;
 
@@ -33,6 +38,7 @@ class LinkController extends AbstractController
 
     public function __construct(LoggerInterface $logger, AppService $appService, LinkService $linkService)
     {
+        $this->serializer = SerializerBuilder::create()->build();
         $this->logger = $logger;
         $this->appService = $appService;
         $this->linkService = $linkService;
@@ -50,7 +56,7 @@ class LinkController extends AbstractController
         try {
             $data = $this->linkService->getAll();
 
-            return $this->json($data);
+            return new JsonResponse($this->serializer->serialize($data, 'json'), 200, [], true);
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage(), $e->getTrace());
 
@@ -112,7 +118,7 @@ class LinkController extends AbstractController
                 );
             }
 
-            return $this->json($res);
+            return new JsonResponse($this->serializer->serialize($res, 'json'), 200, [], true);
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage(), $e->getTrace());
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
@@ -22,9 +23,9 @@ class Link
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(name="media_url", type="string", nullable=true)
      */
-    protected $URL;
+    protected $mediaURL;
 
     /**
      * @var string
@@ -58,6 +59,7 @@ class Link
      * @var \DateTime|null
      *
      * @ORM\Column(name="date_publish", type="date", nullable=true)
+     * @Serializer\Exclude()
      */
     protected $datePublish;
 
@@ -73,7 +75,7 @@ class Link
      */
     public function setURL(?string $url): self
     {
-        $this->URL = $url;
+        $this->mediaURL = $url;
 
         return $this;
     }
@@ -83,7 +85,7 @@ class Link
      */
     public function getURL(): ?string
     {
-        return $this->URL;
+        return $this->mediaURL;
     }
 
     /**
