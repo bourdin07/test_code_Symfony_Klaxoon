@@ -100,7 +100,7 @@ class LinkController extends AbstractController
                         "publishDate" => $publishDate,
                         "width" => $width,
                         "height" => $height,
-                        "duration" => $allProp["duration"],
+                        "duration" => isset($allProp["duration"]) ? $allProp["duration"] : 0,
                         "URL" => $url,
                     ]
                 );
